@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carrusel de Imágenes</title>
+    <style>
+        #carrusel {
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="carrusel">
+        <img src="1.png" alt="Imagen 1">
+        <img src="2.png" alt="Imagen 2">
+        <!-- Agrega más imágenes según sea necesario -->
+        <button id="anterior">Anterior</button>
+        <button id="siguiente">Siguiente</button>
+    </div>
+
+    <script>
+        const carrusel = document.getElementById("carrusel");
+        const imagenes = carrusel.getElementsByTagName("img");
+        const btnAnterior = document.getElementById("anterior");
+        const btnSiguiente = document.getElementById("siguiente");
+        let indiceImagenActual = 0;
+
+        function mostrarImagen(indice) {
+            for (let i = 0; i < imagenes.length; i++) {
+                imagenes[i].style.display = "none";
+            }
+            imagenes[indice].style.display = "block";
+        }
+
+        function retrocederImagen() {
+            indiceImagenActual--;
+            if (indiceImagenActual < 0) {
+                indiceImagenActual = imagenes.length - 1;
+            }
+            mostrarImagen(indiceImagenActual);
+        }
+
+        function avanzarImagen() {
+            indiceImagenActual++;
+            if (indiceImagenActual >= imagenes.length) {
+                indiceImagenActual = 0;
+            }
+            mostrarImagen(indiceImagenActual);
+        }
+
+        btnAnterior.addEventListener("click", retrocederImagen);
+        btnSiguiente.addEventListener("click", avanzarImagen);
+
+        // Mostrar la primera imagen al cargar la página
+        mostrarImagen(indiceImagenActual);
+    </script>
+</body>
+</html>
